@@ -42,9 +42,9 @@ class HomeCubit extends Cubit<HomeState> {
   //     emit(HomeGEtError(e.toString()));
   //   });
   // }
-   Future<ModelGallery> fetchGallery( {token}) async {
+   Future<ModelGallery> fetchGallery() async {
     final response = await http.get(Uri.parse("https://flutter.prominaagency.com/api/my-gallery") ,headers: {
-      'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDcyYjdjNWYzNWU3NWJhMjBkYjk5ZTMzYTlhMTMwMjlmYjU1MjM2YWEyZjNjNDcyNjMzMGJmMDg5NTY3YTQ0YmExOWNiZDUwMzI3ZjE3YjEiLCJpYXQiOjE3MTM5MDM1MTEuODE2MTEzLCJuYmYiOjE3MTM5MDM1MTEuODE2MTE0LCJleHAiOjE3NDU0Mzk1MTEuODE1Mjg4LCJzdWIiOiIzMzEiLCJzY29wZXMiOltdfQ.NJSC6_RS4aoLJLoAHJvNbb2O1em2DoaNmkSUk0goDZRIBaO7sVDdmeq6cgm4P2YgZX3I4Cq8iR-xrMMqgR51ANXv79yUMNeExeLzA5bKvgSKf-55HNkxK8D_732r7VTx6fw0spPf9f3925FqkkYzK_tiVkT44j7FKfZqS_YGTgXDSFo7f6c4N598FVNjtdJMVjm-S9mAzC-CKyOlZZsLj84RfIdnm6hyiaKlIEcJoek79j9UFYuvMByKrnxnPHEhSHexxebeEVvZhthz3cVLhE2TNellnFo0EpF9Z2u1jgfJIbk2TSL0UGdqfCqjBGnGsG4Toq3inhU1bm8DEVVjwl5omcEQ0ufywwPF7TDhSKFnYujjZMb_yYPbD9Od65C5IE1KBLqvh0w0Ys1OGGgTd3Ka-t_7sWlhL2NQAuU09bQ87niGtXoE0TlXVmMNMey5qeiXS9o2QIw2FKTw9Ijnsjc0mieFvlzTpmQYTfm68WZGVkVkjucwE5tj2mVuHNVbn3lvHnerT82qEf8x7l4UHN3SI11yRGINl5SntprIW9FRPDi01xuTPCOACrnUkFNmyPa9uFjGrhcF3QnahfhmNvjDOyn01rzp3scDSXcEH0OtzL8cQaMxLhj8f9nAj1c8Fpvg7KcgPfRaC-vOKE3yAcLcTNtlVNF-yweltLN9Wvo'
+      'Authorization' : 'Bearer $token'
     });
     if (response.statusCode == 200) {
       final data = json.decode(response.body);
@@ -67,7 +67,7 @@ class HomeCubit extends Cubit<HomeState> {
     var multyfile = http.MultipartFile('img',stream,length,filename: basename(file.path) );
     req.files.add(multyfile);
     req.headers.addAll({
-      'Authorization' : 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZDcyYjdjNWYzNWU3NWJhMjBkYjk5ZTMzYTlhMTMwMjlmYjU1MjM2YWEyZjNjNDcyNjMzMGJmMDg5NTY3YTQ0YmExOWNiZDUwMzI3ZjE3YjEiLCJpYXQiOjE3MTM5MDM1MTEuODE2MTEzLCJuYmYiOjE3MTM5MDM1MTEuODE2MTE0LCJleHAiOjE3NDU0Mzk1MTEuODE1Mjg4LCJzdWIiOiIzMzEiLCJzY29wZXMiOltdfQ.NJSC6_RS4aoLJLoAHJvNbb2O1em2DoaNmkSUk0goDZRIBaO7sVDdmeq6cgm4P2YgZX3I4Cq8iR-xrMMqgR51ANXv79yUMNeExeLzA5bKvgSKf-55HNkxK8D_732r7VTx6fw0spPf9f3925FqkkYzK_tiVkT44j7FKfZqS_YGTgXDSFo7f6c4N598FVNjtdJMVjm-S9mAzC-CKyOlZZsLj84RfIdnm6hyiaKlIEcJoek79j9UFYuvMByKrnxnPHEhSHexxebeEVvZhthz3cVLhE2TNellnFo0EpF9Z2u1jgfJIbk2TSL0UGdqfCqjBGnGsG4Toq3inhU1bm8DEVVjwl5omcEQ0ufywwPF7TDhSKFnYujjZMb_yYPbD9Od65C5IE1KBLqvh0w0Ys1OGGgTd3Ka-t_7sWlhL2NQAuU09bQ87niGtXoE0TlXVmMNMey5qeiXS9o2QIw2FKTw9Ijnsjc0mieFvlzTpmQYTfm68WZGVkVkjucwE5tj2mVuHNVbn3lvHnerT82qEf8x7l4UHN3SI11yRGINl5SntprIW9FRPDi01xuTPCOACrnUkFNmyPa9uFjGrhcF3QnahfhmNvjDOyn01rzp3scDSXcEH0OtzL8cQaMxLhj8f9nAj1c8Fpvg7KcgPfRaC-vOKE3yAcLcTNtlVNF-yweltLN9Wvo'
+      'Authorization' : 'Bearer $token'
     });
 
     data.forEach((key, value)

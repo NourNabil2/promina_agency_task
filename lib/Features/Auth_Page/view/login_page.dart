@@ -38,11 +38,12 @@ class LoginPage extends StatelessWidget {
         } else if (state is LoginSuccess) {
           isLoading = false;
           await CashSaver.SaveData(key: 'token', value: state.auth.token);
+          Cubit_Home.fetchGallery();
           Navigator.pushNamedAndRemoveUntil(
             context,
             HomeScreen.id,
                 (route) => false,
-          ).then((value) => Cubit_Home.fetchGallery(token: state.auth.token));
+          );
         } else if (state is LoginError) {
           isLoading = false;
           showSnackBar(context, state.messageErorr!);

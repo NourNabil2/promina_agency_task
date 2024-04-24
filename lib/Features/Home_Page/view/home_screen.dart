@@ -37,6 +37,10 @@ class HomeScreen extends StatelessWidget {
               Navigator.pop(context);
               showSnackBar(context, 'Error While Upload!');
             }
+          if (state is LoginSuccess)
+            {
+              Cubit_Home.fetchGallery();
+            }
 
         },
         builder: (context, state) => Scaffold(
