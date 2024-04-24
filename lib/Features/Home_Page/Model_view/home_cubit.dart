@@ -4,21 +4,14 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
-import 'package:dio/dio.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:bloc/bloc.dart';
 import 'package:http/http.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
-import 'package:promina_agency_test/Core/Functions/cash_save.dart';
-import '../../../Core/Network/API.dart';
-import '../../../Core/Utils/constants.dart';
 import '../../../main.dart';
 import '../Data/Model_Upload.dart';
 import '../Data/Model_gallery.dart';
-import '../view/home_screen.dart';
 part 'home_state.dart';
 
 
