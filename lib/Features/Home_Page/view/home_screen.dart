@@ -14,8 +14,10 @@ import '../../../Core/Widgets/custom_button.dart';
 import '../../Auth_Page/Model_view/login_cubit.dart';
 import '../../Auth_Page/view/login_page.dart';
 import '../Model_view/home_cubit.dart';
-File? image ;
+
+File? image;
 final picker = ImagePicker();
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   static String id = 'Home page';
@@ -26,22 +28,17 @@ class HomeScreen extends StatelessWidget {
     LoginCubit cubit_Login = BlocProvider.of<LoginCubit>(context);
     return BlocConsumer<HomeCubit, HomeState>(
         listener: (context, state) async {
-          if (state is UploadSuccess)
-            {
-              Cubit_Home.fetchGallery();
-              Navigator.pop(context);
-              showSnackBar(context, 'Image uploaded successfully');
-            }
-          else if (state is UploadErorr)
-            {
-              Navigator.pop(context);
-              showSnackBar(context, 'Error While Upload!');
-            }
-          if (state is LoginSuccess)
-            {
-              Cubit_Home.fetchGallery();
-            }
-
+          if (state is UploadSuccess) {
+            Cubit_Home.fetchGallery();
+            Navigator.pop(context);
+            showSnackBar(context, 'Image uploaded successfully');
+          } else if (state is UploadErorr) {
+            Navigator.pop(context);
+            showSnackBar(context, 'Error While Upload!');
+          }
+          if (state is LoginSuccess) {
+            Cubit_Home.fetchGallery();
+          }
         },
         builder: (context, state) => Scaffold(
             body: Container(
@@ -63,53 +60,93 @@ class HomeScreen extends StatelessWidget {
                           children: [
                             Text(
                               'Welcome \n${cubit_Login.User?.user?.name}',
-                              style: Responsive.isTablet(context) == true ?Theme.of(context).textTheme.titleLarge: Theme.of(context).textTheme.titleSmall,
-
+                              style: Responsive.isTablet(context) == true
+                                  ? Theme.of(context).textTheme.titleLarge
+                                  : Theme.of(context).textTheme.titleSmall,
                             ),
                             const Spacer(),
-                            Responsive.isTablet(context) == true ? CircleAvatar(maxRadius: 45,child: Icon(Icons.person,size: 50,),): CircleAvatar(maxRadius: 25,child: Icon(Icons.person,size: 30,),)
-
+                            Responsive.isTablet(context) == true
+                                ? const CircleAvatar(
+                                    maxRadius: 45,
+                                    child: Icon(
+                                      Icons.person,
+                                      size: 50,
+                                    ),
+                                  )
+                                : const CircleAvatar(
+                                    maxRadius: 25,
+                                    child: Icon(
+                                      Icons.person,
+                                      size: 30,
+                                    ),
+                                  )
                           ],
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: ValueApp.kPadding_40),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: ValueApp.kPadding_40),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            HomeButons(onTap: () async{
-                              await CashSaver.Cleardata(key: 'token');
-                              Navigator.pushNamedAndRemoveUntil(
-                                context,
-                                LoginPage.id,
-                                    (route) => false,
-                              );
-                            },text: 'Log Out', icon: CupertinoIcons.arrow_left,color: Colors.redAccent,shadow: Colors.redAccent,),
-                            Spacer(),
-                            HomeButons(onTap: () {
-                              addChatUserDialog(context);
-                            },text: 'Upload', icon: CupertinoIcons.arrow_up,color: Color(0xffff9900),shadow: Color(0xffff9900),),
-
+                            HomeButons(
+                              onTap: () async {
+                                await CashSaver.Cleardata(key: 'token');
+                                Navigator.pushNamedAndRemoveUntil(
+                                  context,
+                                  LoginPage.id,
+                                  (route) => false,
+                                );
+                              },
+                              text: 'Log Out',
+                              icon: CupertinoIcons.arrow_left,
+                              color: Colors.redAccent,
+                              shadow: Colors.redAccent,
+                            ),
+                            const Spacer(),
+                            HomeButons(
+                              onTap: () {
+                                addChatUserDialog(context);
+                              },
+                              text: 'Upload',
+                              icon: CupertinoIcons.arrow_up,
+                              color: const Color(0xffff9900),
+                              shadow: const Color(0xffff9900),
+                            ),
                           ],
                         ),
                       ),
                       Expanded(
-
                         child: Padding(
                           padding: const EdgeInsets.all(ValueApp.kPadding_8),
                           child: GridView.builder(
                             gridDelegate:
-                            SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: Responsive.isTablet(context) == true ? 5 :3,
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount:
+                                  Responsive.isTablet(context) == true ? 5 : 3,
                               crossAxisSpacing: 10,
                               mainAxisSpacing: 10,
                             ),
-                            itemCount: Cubit_Home.gallery?.data.images.length ?? 0,
+                            itemCount:
+                                Cubit_Home.gallery?.data.images.length ?? 0,
                             itemBuilder: (context, index) => Container(
-                              margin:Responsive.isTablet(context) == true ? EdgeInsets.all(5) : null,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20),boxShadow: [BoxShadow(color: Colors.black54,blurRadius: 5,spreadRadius: 1,blurStyle: BlurStyle.normal)],
-                              image: DecorationImage(image:  CachedNetworkImageProvider(Cubit_Home.gallery!.data.images[index]),fit:BoxFit.fill )
-                              ),
+                              margin: Responsive.isTablet(context) == true
+                                  ? EdgeInsets.all(5)
+                                  : null,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                        color: Colors.black54,
+                                        blurRadius: 5,
+                                        spreadRadius: 1,
+                                        blurStyle: BlurStyle.normal)
+                                  ],
+                                  image: DecorationImage(
+                                      image: CachedNetworkImageProvider(
+                                          Cubit_Home
+                                              .gallery!.data.images[index]),
+                                      fit: BoxFit.fill)),
                             ),
                           ),
                         ),
